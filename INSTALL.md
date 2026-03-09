@@ -99,6 +99,7 @@ scripts/HSRGUI_Mobile_0.8.1.user.js
 스크립트를 저장합니다.
 
 방법2. 추천!
+
 Tampermonkey 대시보드를 엽니다.
 도구 탭으로 이동후, 가져오기 클릭하기
 HSRGUI_Mobile_0.8.1.user.js
@@ -128,3 +129,4 @@ SILVER
 
 이 UI는 실험적인 버전입니다.
 일부 브라우저 업데이트 또는 ChatGPT UI 업데이트로 인해 일시적으로 호환성이 깨질 수 있습니다.Some browser updates or ChatGPT UI updates may temporarily break compatibility.
+
