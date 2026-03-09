@@ -4,8 +4,8 @@
 // @version      0.8.1
 // @description  HSRGUI Mobile adaptation
 // @match        https://chatgpt.com/*
-// @updateURL    https://raw.githubusercontent.com/USERNAME/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
-// @downloadURL  https://raw.githubusercontent.com/USERNAME/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
+// @updateURL    https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
+// @downloadURL  https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
 // ==/UserScript==
 
 (function () {
