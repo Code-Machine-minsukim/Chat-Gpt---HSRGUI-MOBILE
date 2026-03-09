@@ -15,10 +15,6 @@ https://github.com/engineer-502/HSRGUI
 This mobile version was created with permission and encouragement from the original developer.
 
 ---
-## Install (Test)
-
-https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
----
 
 ## Features
 
