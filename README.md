@@ -6,6 +6,14 @@
 
 Mobile adaptation of **HSRGUI** for ChatGPT.
 
+## Preview
+
+### Mobile UI
+
+![Mobile UI](preview/mobileui.jpg)
+
+---
+
 ## Latest Version
 
 **Current latest version: `0.8.3`**
@@ -42,14 +50,22 @@ Please open an issue on GitHub.
 - Chat bubble styling
 
 ---
-## Preview
+## Install Guide
 
-### Mobile UI
-
-![Mobile UI](preview/mobileui.jpg)
-
-### Install Guide (Tampermonkey)
+### Step1 Edge Canary & Tampermonkey
 ![Install Guide](preview/installguide.png)
+
+
+### Step2 Main file (HSRGUI_Mobile.user.js)
+
+Install Tampermonkey and click in Canary:
+
+https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
+
+### Step3 Import
+
+Open Dashboard and Go to Utilities Tap
+
 ![2](preview/installguide2.jpg)
 
 ---
@@ -59,7 +75,7 @@ Please open an issue on GitHub.
 | Version | Status |
 |------|------|
 | 0.5.2 | First public mobile build |
-| 0.8.1 | Emotion sticker system + theme switcher |
+| 0.8.3 | Emotion sticker system + theme switcher |
 
 
 ---
@@ -93,6 +109,9 @@ Community modification
 ## License
 
 This project follows the spirit and license of the original HSRGUI project.
+
+This project is an unofficial, fan-made UI theme extension.
+All rights to Honkai: Star Rail, HoYoverse, and any related names, logos, and content are owned by their respective rights holders.
 
 이 프로젝트는 팬메이드 비공식 UI 테마 확장 프로그램입니다.
 Honkai: Star Rail, HoYoverse 및 관련 명칭/로고/콘텐츠의 권리는 각 권리자에게 있습니다.
