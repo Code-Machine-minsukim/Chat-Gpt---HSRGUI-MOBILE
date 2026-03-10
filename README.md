@@ -1,6 +1,6 @@
 # HSRGUI Mobile
 
-![version](https://img.shields.io/badge/version-0.8.2-blue)
+![version](https://img.shields.io/badge/version-0.8.3-blue)
 ![platform](https://img.shields.io/badge/platform-Android-green)
 ![userscript](https://img.shields.io/badge/userscript-Tampermonkey-orange)
 ![status](https://img.shields.io/badge/status-experimental-purple)
@@ -45,13 +45,6 @@ This mobile version was created with permission and encouragement from the origi
 |------|------|
 | 0.5.2 | First public mobile build |
 | 0.8.1 | Emotion sticker system + theme switcher |
-| 0.8.2 | Major changes in this version:
-
-- Project-owned asset system
-- Removed dependency on original repository assets
-- Improved avatar resource structure
-- Improved sticker system structure
-- Prepared architecture for future versions |
 
 
 ---
