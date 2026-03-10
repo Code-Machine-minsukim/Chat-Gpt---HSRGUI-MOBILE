@@ -31,11 +31,11 @@ This mobile version was created with permission and encouragement from the origi
 
 ### Mobile UI
 
-![Mobile UI](preview/mobileui.png)
+![Mobile UI](preview/mobileui.jpg)
 
 ### Install Guide (Tampermonkey)
 ![Install Guide](preview/installguide.png)
-![2](preview/installguide2.png)
+![2](preview/installguide2.jpg)
 
 ---
 
