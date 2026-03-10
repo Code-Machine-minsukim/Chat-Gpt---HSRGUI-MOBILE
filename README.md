@@ -4,7 +4,9 @@
 ![platform](https://img.shields.io/badge/platform-mobile-green)
 ![userscript](https://img.shields.io/badge/userscript-Tampermonkey-orange)
 
-Mobile adaptation of **HSRGUI** for ChatGPT.
+Mobile adaptation of **HSRGUI**, bringing a  
+**Honkai Star Rail styled UI to ChatGPT mobile.**
+
 
 ## Preview
 
@@ -12,31 +14,6 @@ Mobile adaptation of **HSRGUI** for ChatGPT.
 
 ![Mobile UI](preview/mobileui.jpg)
 
----
-
-## Latest Version
-
-**Current latest version: `0.8.3`**
-
-Stable public release for the current asset system and mobile UI build.
-
-Mobile adaptation of the original 
-**HSRGUI ChatGPT interface**.
-
-This project reworks HSRGUI into a **mobile friendly userscript version** for browsers such as Edge Canary.
-
-Original project:
-https://github.com/engineer-502/HSRGUI
-
-This mobile version was created with permission and encouragement from the original developer.
-
----
-## Beta Testing
-
-HSRGUI Mobile is currently in **beta testing (v0.8.3)**.
-
-Feedback and bug reports are welcome.
-Please open an issue on GitHub.
 ---
 
 ## Features
@@ -70,6 +47,31 @@ Open Dashboard and Go to Utilities Tap
 
 ---
 
+## Latest Version
+
+**Current latest version: `0.8.3`**
+
+Stable public release for the current asset system and mobile UI build.
+
+Mobile adaptation of the original 
+**HSRGUI ChatGPT interface**.
+
+This project reworks HSRGUI into a **mobile friendly userscript version** for browsers such as Edge Canary.
+
+Original project:
+https://github.com/engineer-502/HSRGUI
+
+This mobile version was created with permission and encouragement from the original developer.
+
+---
+## Beta Testing
+
+HSRGUI Mobile is currently in **beta testing (v0.8.3)**.
+
+Feedback and bug reports are welcome.
+Please open an issue on GitHub.
+
+---
 ## Current Versions
 
 | Version | Status |
