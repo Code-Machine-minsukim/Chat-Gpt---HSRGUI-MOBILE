@@ -31,7 +31,7 @@ This mobile version was created with permission and encouragement from the origi
 
 ### Mobile UI
 
-![Mobile UI](preview/mobile_ui.png)
+![Mobile UI](preview/mobileui.png)
 
 ### Install Guide (Tampermonkey)
 ![Install Guide](preview/installguide.png)
