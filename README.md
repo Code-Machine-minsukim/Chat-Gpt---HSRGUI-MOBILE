@@ -27,6 +27,17 @@ This mobile version was created with permission and encouragement from the origi
 - Chat bubble styling
 
 ---
+## Preview
+
+### Mobile UI
+
+![Mobile UI](preview/mobile_ui.png)
+
+### Install Guide (Tampermonkey)
+![Install Guide](preview/installguide.png)
+![2](preview/installguide2.png)
+
+---
 
 ## Current Versions
 
