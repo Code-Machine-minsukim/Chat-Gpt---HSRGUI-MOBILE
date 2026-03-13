@@ -12,7 +12,8 @@ Mobile adaptation of **HSRGUI**, bringing a
 
 ### Mobile UI
 
-![Mobile UI](preview/mobileui.jpg)
+![Mobile UI](preview/MobileUi1.jpg)
+![Mobile UI](preview/MobileUi2.jpg)
 
 ---
 
