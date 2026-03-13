@@ -1,12 +1,17 @@
 # Changelog
 
-## 0.9.2
+## 0.9.3
 
 Improved
 
 - character theme colors now better match Honkai Star Rail aesthetics
 - polished settings panel visuals
 - enhanced compact mode with clearer spacing reduction
+
+Changed
+
+-removed Midnight theme
+-removed Silver theme
 
 Added
 
@@ -85,5 +90,6 @@ Features
 - avatar display
 - chat bubble styling
 - basic sticker support
+
 
 
