@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HSRGUI Mobile
 // @namespace    hsrgui.mobile
-// @version      0.9.1
+// @version      0.9.2
 // @description  HSR themed UI for ChatGPT mobile
 // @match        https://chatgpt.com/*
 // @grant        GM_addStyle
@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "hsrgui_mobile_config_v091";
+  const STORAGE_KEY = "hsrgui_mobile_config_v092";
 
   const DEFAULT_CONFIG = {
     headerTitle: "오공열차",
@@ -30,112 +30,124 @@
 
   const THEMES = {
     express: {
-      bg: "#bfc7cf",
-      panel: "rgba(255,255,255,0.84)",
-      panelBorder: "rgba(0,0,0,0.06)",
-      headerTitle: "#111111",
-      headerSub: "rgba(0,0,0,0.55)",
-      chipBg: "rgba(255,255,255,0.72)",
-      chipText: "#111111",
-      userBubble: "#d8c39b",
-      userBubbleText: "#111111",
-      assistantBubble: "#ececec",
-      assistantBubbleText: "#111111",
-      shadow: "0 4px 12px rgba(0,0,0,0.08)",
-      settingsBg: "rgba(255,255,255,0.96)",
-      settingsText: "#111111",
-      settingsBorder: "rgba(0,0,0,0.08)",
-      inputBg: "rgba(255,255,255,0.95)"
+      bg: "#cfd8ff",
+      panel: "rgba(250,250,255,0.88)",
+      panelBorder: "rgba(119,130,200,0.10)",
+      headerTitle: "#36417a",
+      headerSub: "rgba(54,65,122,0.65)",
+      chipBg: "rgba(255,255,255,0.80)",
+      chipText: "#36417a",
+      userBubble: "#e6d5ff",
+      userBubbleText: "#2f3055",
+      assistantBubble: "#ffffff",
+      assistantBubbleText: "#20243f",
+      shadow: "0 6px 18px rgba(90,110,180,0.12)",
+      settingsBg: "rgba(252,252,255,0.97)",
+      settingsText: "#303b72",
+      settingsBorder: "rgba(119,130,200,0.14)",
+      inputBg: "rgba(255,255,255,0.98)",
+      accent: "#ffb6d9",
+      accentSoft: "rgba(255,182,217,0.18)"
     },
     midnight: {
-      bg: "#20262d",
-      panel: "rgba(38,44,54,0.88)",
+      bg: "#1f2430",
+      panel: "rgba(32,38,48,0.90)",
       panelBorder: "rgba(255,255,255,0.06)",
-      headerTitle: "#f3f5f7",
-      headerSub: "rgba(255,255,255,0.65)",
+      headerTitle: "#edf2ff",
+      headerSub: "rgba(237,242,255,0.66)",
       chipBg: "rgba(255,255,255,0.10)",
-      chipText: "#f3f5f7",
-      userBubble: "#5a4b7a",
+      chipText: "#edf2ff",
+      userBubble: "#45506b",
       userBubbleText: "#ffffff",
       assistantBubble: "#2c3340",
-      assistantBubbleText: "#f2f2f2",
-      shadow: "0 4px 14px rgba(0,0,0,0.24)",
-      settingsBg: "rgba(29,34,42,0.98)",
-      settingsText: "#f3f5f7",
-      settingsBorder: "rgba(255,255,255,0.08)",
-      inputBg: "rgba(29,34,42,0.96)"
+      assistantBubbleText: "#f2f5ff",
+      shadow: "0 8px 20px rgba(0,0,0,0.26)",
+      settingsBg: "rgba(28,33,42,0.98)",
+      settingsText: "#edf2ff",
+      settingsBorder: "rgba(255,255,255,0.09)",
+      inputBg: "rgba(36,42,54,0.96)",
+      accent: "#88a1ff",
+      accentSoft: "rgba(136,161,255,0.18)"
     },
     silver: {
-      bg: "#d8dde3",
-      panel: "rgba(250,250,252,0.88)",
-      panelBorder: "rgba(0,0,0,0.05)",
-      headerTitle: "#20242a",
-      headerSub: "rgba(0,0,0,0.50)",
-      chipBg: "rgba(255,255,255,0.72)",
-      chipText: "#20242a",
-      userBubble: "#cfd4dc",
-      userBubbleText: "#111111",
-      assistantBubble: "#f3f4f6",
-      assistantBubbleText: "#111111",
-      shadow: "0 4px 12px rgba(0,0,0,0.07)",
-      settingsBg: "rgba(252,252,253,0.98)",
-      settingsText: "#20242a",
-      settingsBorder: "rgba(0,0,0,0.08)",
-      inputBg: "rgba(255,255,255,0.96)"
+      bg: "#dce3ea",
+      panel: "rgba(252,253,255,0.90)",
+      panelBorder: "rgba(50,60,80,0.06)",
+      headerTitle: "#2d3440",
+      headerSub: "rgba(45,52,64,0.58)",
+      chipBg: "rgba(255,255,255,0.82)",
+      chipText: "#2d3440",
+      userBubble: "#d7dce8",
+      userBubbleText: "#1d2532",
+      assistantBubble: "#f8f9fc",
+      assistantBubbleText: "#1d2532",
+      shadow: "0 6px 16px rgba(80,90,110,0.10)",
+      settingsBg: "rgba(254,254,255,0.98)",
+      settingsText: "#2d3440",
+      settingsBorder: "rgba(50,60,80,0.08)",
+      inputBg: "rgba(255,255,255,0.98)",
+      accent: "#92a3b7",
+      accentSoft: "rgba(146,163,183,0.18)"
     },
     acheron: {
-      bg: "#2a2233",
-      panel: "rgba(39,31,48,0.90)",
+      bg: "#1a1623",
+      panel: "rgba(35,28,48,0.92)",
       panelBorder: "rgba(255,255,255,0.06)",
       headerTitle: "#efe7ff",
       headerSub: "rgba(239,231,255,0.68)",
-      chipBg: "rgba(255,255,255,0.10)",
+      chipBg: "rgba(255,255,255,0.09)",
       chipText: "#efe7ff",
-      userBubble: "#6c5a88",
+      userBubble: "#4d3a6d",
       userBubbleText: "#ffffff",
-      assistantBubble: "#372d45",
+      assistantBubble: "#2a2338",
       assistantBubbleText: "#f6f2ff",
-      shadow: "0 4px 16px rgba(0,0,0,0.28)",
-      settingsBg: "rgba(30,25,38,0.98)",
+      shadow: "0 10px 24px rgba(0,0,0,0.30)",
+      settingsBg: "rgba(26,22,35,0.98)",
       settingsText: "#efe7ff",
-      settingsBorder: "rgba(255,255,255,0.08)",
-      inputBg: "rgba(30,25,38,0.96)"
+      settingsBorder: "rgba(165,109,255,0.18)",
+      inputBg: "rgba(39,31,52,0.96)",
+      accent: "#a56dff",
+      accentSoft: "rgba(165,109,255,0.22)"
     },
     asta: {
-      bg: "#f1d7c6",
-      panel: "rgba(255,250,246,0.90)",
-      panelBorder: "rgba(120,70,40,0.08)",
+      bg: "#f7d3b3",
+      panel: "rgba(255,244,232,0.92)",
+      panelBorder: "rgba(160,90,30,0.10)",
       headerTitle: "#7a3f16",
       headerSub: "rgba(122,63,22,0.68)",
-      chipBg: "rgba(255,255,255,0.74)",
+      chipBg: "rgba(255,255,255,0.84)",
       chipText: "#7a3f16",
-      userBubble: "#f0b287",
+      userBubble: "#f3a86e",
       userBubbleText: "#3a1b08",
-      assistantBubble: "#fff3ea",
+      assistantBubble: "#fffaf3",
       assistantBubbleText: "#3a1b08",
-      shadow: "0 4px 12px rgba(120,70,40,0.12)",
-      settingsBg: "rgba(255,250,246,0.98)",
-      settingsText: "#5f3113",
-      settingsBorder: "rgba(120,70,40,0.10)",
-      inputBg: "rgba(255,252,248,0.96)"
+      shadow: "0 8px 18px rgba(170,100,40,0.14)",
+      settingsBg: "rgba(255,249,242,0.98)",
+      settingsText: "#6a3613",
+      settingsBorder: "rgba(170,100,40,0.14)",
+      inputBg: "rgba(255,255,255,0.96)",
+      accent: "#ff9a3c",
+      accentSoft: "rgba(255,154,60,0.20)"
     },
     castorice: {
-      bg: "#d7d9ee",
-      panel: "rgba(248,248,255,0.90)",
-      panelBorder: "rgba(60,70,120,0.08)",
+      bg: "#dadcf6",
+      panel: "rgba(248,248,255,0.92)",
+      panelBorder: "rgba(90,100,180,0.10)",
       headerTitle: "#4a4f84",
       headerSub: "rgba(74,79,132,0.64)",
-      chipBg: "rgba(255,255,255,0.78)",
+      chipBg: "rgba(255,255,255,0.84)",
       chipText: "#4a4f84",
-      userBubble: "#c9d2ff",
-      userBubbleText: "#1c2244",
-      assistantBubble: "#f6f7ff",
-      assistantBubbleText: "#1c2244",
-      shadow: "0 4px 12px rgba(60,70,120,0.10)",
-      settingsBg: "rgba(250,250,255,0.98)",
-      settingsText: "#3d4478",
-      settingsBorder: "rgba(60,70,120,0.10)",
-      inputBg: "rgba(252,252,255,0.96)"
+      userBubble: "#ccd1ff",
+      userBubbleText: "#1d224b",
+      assistantBubble: "#ffffff",
+      assistantBubbleText: "#1d224b",
+      shadow: "0 8px 18px rgba(90,100,180,0.12)",
+      settingsBg: "rgba(251,251,255,0.98)",
+      settingsText: "#43497e",
+      settingsBorder: "rgba(90,100,180,0.12)",
+      inputBg: "rgba(255,255,255,0.98)",
+      accent: "#7a80ff",
+      accentSoft: "rgba(122,128,255,0.20)"
     }
   };
 
@@ -181,6 +193,15 @@
 
   const CONFIG = loadConfig();
 
+  function resetConfig() {
+    Object.assign(CONFIG, structuredClone(DEFAULT_CONFIG));
+    saveConfig();
+    applyCss();
+    refreshHeader();
+    syncSettingsPanel();
+    processMessages(true);
+  }
+
   function applyCharacterPreset(mode) {
     if (!CHARACTER_PRESETS[mode]) return;
     if (mode === "custom") {
@@ -203,7 +224,7 @@
 
   const CDN_JSDELIVR = "https://cdn.jsdelivr.net/gh/Code-Machine-minsukim/HSRGUI-Mobile@main/assets";
   const CDN_RAW = "https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/assets";
-  const ASSET_VERSION = "091";
+  const ASSET_VERSION = "092";
 
   function assetUrl(path, useRaw = false) {
     const base = useRaw ? CDN_RAW : CDN_JSDELIVR;
@@ -298,19 +319,20 @@
   function buildCss() {
     theme = THEMES[CONFIG.theme] || THEMES.express;
 
-    const headerPad = isCompact() ? "10px 14px 8px 14px" : "14px 18px 10px 18px";
-    const titleSize = isCompact() ? "18px" : "20px";
-    const subtitleSize = isCompact() ? "11px" : "12px";
-    const labelFont = isCompact() ? "13px" : "14px";
-    const avatarSize = isCompact() ? "34px" : "42px";
-    const bubblePad = isCompact() ? "11px 13px" : "14px 16px";
-    const stickerWidth = isCompact() ? "82px" : "110px";
-    const turnGap = isCompact() ? "2px" : "4px";
-    const settingsTop = isCompact() ? "56px" : "64px";
+    const headerPad = isCompact() ? "9px 12px 7px 12px" : "14px 18px 10px 18px";
+    const titleSize = isCompact() ? "17px" : "20px";
+    const subtitleSize = isCompact() ? "10px" : "12px";
+    const labelFont = isCompact() ? "12px" : "14px";
+    const avatarSize = isCompact() ? "32px" : "42px";
+    const bubblePad = isCompact() ? "9px 11px" : "14px 16px";
+    const stickerWidth = isCompact() ? "78px" : "110px";
+    const turnGap = isCompact() ? "1px" : "4px";
+    const settingsTop = isCompact() ? "52px" : "64px";
+    const bubbleRadius = isCompact() ? "16px" : "18px";
 
     return `
       body {
-        background: ${theme.bg} !important;
+        background: linear-gradient(180deg, ${theme.bg} 0%, ${theme.bg} 100%) !important;
         overflow-x: hidden !important;
       }
 
@@ -323,7 +345,7 @@
         top: 0;
         z-index: 999;
         background: ${theme.panel};
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
         border-bottom: 1px solid ${theme.panelBorder};
         padding: ${headerPad};
         box-shadow: ${theme.shadow};
@@ -338,11 +360,11 @@
       }
 
       #hsr-title {
-        font-weight: 800;
+        font-weight: 900;
         font-size: ${titleSize};
         color: ${theme.headerTitle};
         line-height: 1.1;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
       }
 
       #hsr-subtitle {
@@ -364,10 +386,11 @@
         display: ${CONFIG.showHeaderBadge ? "flex" : "none"};
         align-items: center;
         gap: 8px;
-        padding: 6px 10px;
+        padding: 7px 12px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.55);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        background: rgba(255,255,255,0.60);
+        border: 1px solid ${theme.settingsBorder};
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       }
 
       #hsr-badge img {
@@ -377,24 +400,25 @@
         object-fit: cover;
         display: block;
         background: rgba(255,255,255,0.35);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.10);
       }
 
       #hsr-badge-text {
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 800;
         color: ${theme.headerTitle};
         white-space: nowrap;
       }
 
       #hsr-settings-btn {
-        border: none;
+        border: 1px solid ${theme.settingsBorder};
         border-radius: 999px;
-        padding: 7px 11px;
+        padding: 8px 12px;
         font-size: 14px;
         font-weight: 800;
-        background: ${theme.chipBg};
+        background: linear-gradient(180deg, ${theme.chipBg} 0%, rgba(255,255,255,0.55) 100%);
         color: ${theme.chipText};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       }
 
       #hsr-settings-panel {
@@ -402,17 +426,17 @@
         top: ${settingsTop};
         right: 12px;
         width: min(340px, calc(100vw - 24px));
-        max-height: 70vh;
+        max-height: 72vh;
         overflow-y: auto;
         background: ${theme.settingsBg};
         color: ${theme.settingsText};
         border: 1px solid ${theme.settingsBorder};
-        border-radius: 16px;
-        box-shadow: 0 16px 36px rgba(0,0,0,0.18);
-        padding: 14px;
+        border-radius: 18px;
+        box-shadow: 0 18px 36px rgba(0,0,0,0.18);
+        padding: 16px;
         z-index: 99999;
         display: none;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
       }
 
       #hsr-settings-panel.open {
@@ -420,47 +444,52 @@
       }
 
       .hsr-settings-title {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 900;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
+        color: ${theme.headerTitle};
       }
 
       .hsr-settings-group {
-        margin-bottom: 12px;
+        margin-bottom: 14px;
       }
 
       .hsr-settings-label {
         font-size: 12px;
-        font-weight: 800;
-        margin-bottom: 6px;
-        opacity: 0.8;
+        font-weight: 900;
+        margin-bottom: 8px;
+        opacity: 0.86;
       }
 
       .hsr-settings-options {
         display: flex;
-        gap: 6px;
+        gap: 8px;
         flex-wrap: wrap;
       }
 
       .hsr-settings-option {
-        border: none;
+        border: 1px solid ${theme.settingsBorder};
         border-radius: 999px;
-        padding: 6px 10px;
+        padding: 8px 14px;
         font-size: 11px;
-        font-weight: 800;
-        background: ${theme.chipBg};
+        font-weight: 900;
+        background: linear-gradient(180deg, ${theme.chipBg} 0%, rgba(255,255,255,0.60) 100%);
         color: ${theme.chipText};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       }
 
       .hsr-settings-option.is-active {
-        outline: 2px solid rgba(0,0,0,0.18);
+        outline: none;
+        border-color: ${theme.accent};
+        box-shadow:
+          0 0 0 2px ${theme.accentSoft},
+          0 6px 14px rgba(0,0,0,0.08);
       }
 
       .hsr-settings-inputs {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
 
       .hsr-settings-input {
@@ -469,16 +498,34 @@
         border: 1px solid ${theme.settingsBorder};
         background: ${theme.inputBg};
         color: ${theme.settingsText};
-        border-radius: 12px;
-        padding: 10px 12px;
+        border-radius: 16px;
+        padding: 12px 14px;
         font-size: 13px;
         outline: none;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.30);
+      }
+
+      .hsr-settings-input:focus {
+        border-color: ${theme.accent};
+        box-shadow: 0 0 0 2px ${theme.accentSoft};
       }
 
       .hsr-settings-hint {
         font-size: 11px;
         opacity: 0.65;
-        margin-top: 2px;
+        margin-top: 4px;
+      }
+
+      .hsr-settings-reset {
+        width: 100%;
+        border: 1px solid rgba(220,80,80,0.22);
+        background: linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(255,245,245,0.90) 100%);
+        color: #a33a3a;
+        border-radius: 14px;
+        padding: 11px 14px;
+        font-size: 12px;
+        font-weight: 900;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       }
 
       main article,
@@ -523,7 +570,7 @@
         align-items: center !important;
         gap: 10px !important;
         margin: 4px 0 8px 0 !important;
-        font-weight: 800 !important;
+        font-weight: 900 !important;
         font-size: ${labelFont} !important;
         color: ${theme.headerTitle};
       }
@@ -547,9 +594,9 @@
       }
 
       .hsr-bubble {
-        border-radius: 18px !important;
+        border-radius: ${bubbleRadius} !important;
         padding: ${bubblePad} !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.08);
         overflow: visible !important;
         word-break: break-word !important;
       }
@@ -572,7 +619,7 @@
         width: ${stickerWidth};
         height: auto;
         display: block;
-        margin-top: 10px;
+        margin-top: ${isCompact() ? "6px" : "10px"};
         filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
         user-select: none;
         pointer-events: none;
@@ -602,14 +649,14 @@
       }
 
       @media (max-width: 900px) {
-        #hsr-header { padding: ${isCompact() ? "9px 12px 7px 12px" : "12px 16px 9px 16px"}; }
-        #hsr-title { font-size: ${isCompact() ? "17px" : "18px"}; }
-        #hsr-subtitle { font-size: 11px; }
-        #hsr-badge { padding: 5px 9px; }
+        #hsr-header { padding: ${headerPad}; }
+        #hsr-title { font-size: ${titleSize}; }
+        #hsr-subtitle { font-size: ${subtitleSize}; }
+        #hsr-badge { padding: 6px 10px; }
         #hsr-badge img { width: 24px; height: 24px; }
         #hsr-badge-text { font-size: 11px; }
-        #hsr-settings-btn { padding: 6px 10px; font-size: 13px; }
-        #hsr-settings-panel { top: ${isCompact() ? "52px" : "58px"}; right: 8px; width: min(320px, calc(100vw - 16px)); }
+        #hsr-settings-btn { padding: 7px 11px; font-size: 13px; }
+        #hsr-settings-panel { top: ${settingsTop}; right: 8px; width: min(320px, calc(100vw - 16px)); }
       }
     `;
   }
@@ -736,6 +783,10 @@
         </div>
         <div class="hsr-settings-hint">Changes are saved automatically.</div>
       </div>
+
+      <div class="hsr-settings-group">
+        <button id="hsr-reset-btn" class="hsr-settings-reset" type="button">Reset to Default</button>
+      </div>
     `;
 
     document.body.appendChild(panel);
@@ -825,6 +876,7 @@
     const titleInput = panel.querySelector("#hsr-room-title");
     const subtitleInput = panel.querySelector("#hsr-room-subtitle");
     const userNameInput = panel.querySelector("#hsr-user-name");
+    const resetBtn = panel.querySelector("#hsr-reset-btn");
 
     titleInput.addEventListener("input", () => {
       CONFIG.headerTitle = titleInput.value || DEFAULT_CONFIG.headerTitle;
@@ -842,6 +894,10 @@
       CONFIG.userName = userNameInput.value || DEFAULT_CONFIG.userName;
       saveConfig();
       processMessages(true);
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resetConfig();
     });
 
     document.addEventListener("click", (e) => {
