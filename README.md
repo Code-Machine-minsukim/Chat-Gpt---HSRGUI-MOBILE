@@ -38,6 +38,8 @@ Mobile adaptation of **HSRGUI**, bringing a
 Install Tampermonkey and click in Canary:
 
 https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/scripts/HSRGUI_Mobile.user.js
+or
+Go to Realease Page and Download .js
 
 ### Step3 Import
 
