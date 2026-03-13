@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HSRGUI Mobile
 // @namespace    hsrgui.mobile
-// @version      0.8.3
+// @version      0.9.0
 // @description  HSR themed UI for ChatGPT mobile
 // @match        https://chatgpt.com/*
 // @grant        GM_addStyle
@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "hsrgui_mobile_config_v083";
+  const STORAGE_KEY = "hsrgui_mobile_config_v090";
 
   const DEFAULT_CONFIG = {
     headerTitle: "오공열차",
@@ -22,9 +22,9 @@
     assistantAvatarKey: "march7",
     userAvatarKey: "stelle",
     theme: "express",
-    randomSticker: false,
     showHeaderBadge: true,
-    stickerMode: "emotion" // emotion | random | off
+    stickerMode: "emotion", // emotion | random | on | off
+    characterThemeMode: "march7" // march7 | acheron | asta | castorice | custom
   };
 
   const THEMES = {
@@ -40,7 +40,10 @@
       userBubbleText: "#111111",
       assistantBubble: "#ececec",
       assistantBubbleText: "#111111",
-      shadow: "0 4px 12px rgba(0,0,0,0.08)"
+      shadow: "0 4px 12px rgba(0,0,0,0.08)",
+      settingsBg: "rgba(255,255,255,0.96)",
+      settingsText: "#111111",
+      settingsBorder: "rgba(0,0,0,0.08)"
     },
     midnight: {
       bg: "#20262d",
@@ -54,7 +57,10 @@
       userBubbleText: "#ffffff",
       assistantBubble: "#2c3340",
       assistantBubbleText: "#f2f2f2",
-      shadow: "0 4px 14px rgba(0,0,0,0.24)"
+      shadow: "0 4px 14px rgba(0,0,0,0.24)",
+      settingsBg: "rgba(29,34,42,0.98)",
+      settingsText: "#f3f5f7",
+      settingsBorder: "rgba(255,255,255,0.08)"
     },
     silver: {
       bg: "#d8dde3",
@@ -68,8 +74,86 @@
       userBubbleText: "#111111",
       assistantBubble: "#f3f4f6",
       assistantBubbleText: "#111111",
-      shadow: "0 4px 12px rgba(0,0,0,0.07)"
+      shadow: "0 4px 12px rgba(0,0,0,0.07)",
+      settingsBg: "rgba(252,252,253,0.98)",
+      settingsText: "#20242a",
+      settingsBorder: "rgba(0,0,0,0.08)"
+    },
+    acheron: {
+      bg: "#2a2233",
+      panel: "rgba(39,31,48,0.90)",
+      panelBorder: "rgba(255,255,255,0.06)",
+      headerTitle: "#efe7ff",
+      headerSub: "rgba(239,231,255,0.68)",
+      chipBg: "rgba(255,255,255,0.10)",
+      chipText: "#efe7ff",
+      userBubble: "#6c5a88",
+      userBubbleText: "#ffffff",
+      assistantBubble: "#372d45",
+      assistantBubbleText: "#f6f2ff",
+      shadow: "0 4px 16px rgba(0,0,0,0.28)",
+      settingsBg: "rgba(30,25,38,0.98)",
+      settingsText: "#efe7ff",
+      settingsBorder: "rgba(255,255,255,0.08)"
+    },
+    asta: {
+      bg: "#f1d7c6",
+      panel: "rgba(255,250,246,0.90)",
+      panelBorder: "rgba(120,70,40,0.08)",
+      headerTitle: "#7a3f16",
+      headerSub: "rgba(122,63,22,0.68)",
+      chipBg: "rgba(255,255,255,0.74)",
+      chipText: "#7a3f16",
+      userBubble: "#f0b287",
+      userBubbleText: "#3a1b08",
+      assistantBubble: "#fff3ea",
+      assistantBubbleText: "#3a1b08",
+      shadow: "0 4px 12px rgba(120,70,40,0.12)",
+      settingsBg: "rgba(255,250,246,0.98)",
+      settingsText: "#5f3113",
+      settingsBorder: "rgba(120,70,40,0.10)"
+    },
+    castorice: {
+      bg: "#d7d9ee",
+      panel: "rgba(248,248,255,0.90)",
+      panelBorder: "rgba(60,70,120,0.08)",
+      headerTitle: "#4a4f84",
+      headerSub: "rgba(74,79,132,0.64)",
+      chipBg: "rgba(255,255,255,0.78)",
+      chipText: "#4a4f84",
+      userBubble: "#c9d2ff",
+      userBubbleText: "#1c2244",
+      assistantBubble: "#f6f7ff",
+      assistantBubbleText: "#1c2244",
+      shadow: "0 4px 12px rgba(60,70,120,0.10)",
+      settingsBg: "rgba(250,250,255,0.98)",
+      settingsText: "#3d4478",
+      settingsBorder: "rgba(60,70,120,0.10)"
     }
+  };
+
+  const CHARACTER_PRESETS = {
+    march7: {
+      assistantName: "March.7th",
+      assistantAvatarKey: "march7",
+      theme: "express"
+    },
+    acheron: {
+      assistantName: "Acheron",
+      assistantAvatarKey: "acheron",
+      theme: "acheron"
+    },
+    asta: {
+      assistantName: "Asta",
+      assistantAvatarKey: "asta",
+      theme: "asta"
+    },
+    castorice: {
+      assistantName: "Castorice",
+      assistantAvatarKey: "castorice",
+      theme: "castorice"
+    },
+    custom: null
   };
 
   function loadConfig() {
@@ -89,11 +173,31 @@
   }
 
   const CONFIG = loadConfig();
+
+  function applyCharacterPreset(mode) {
+    if (!CHARACTER_PRESETS[mode]) return;
+    if (mode === "custom") {
+      CONFIG.characterThemeMode = "custom";
+      saveConfig();
+      return;
+    }
+    const preset = CHARACTER_PRESETS[mode];
+    CONFIG.characterThemeMode = mode;
+    CONFIG.assistantName = preset.assistantName;
+    CONFIG.assistantAvatarKey = preset.assistantAvatarKey;
+    CONFIG.theme = preset.theme;
+    saveConfig();
+  }
+
+  if (!CONFIG.characterThemeMode) {
+    CONFIG.characterThemeMode = "march7";
+  }
+
   let theme = THEMES[CONFIG.theme] || THEMES.express;
 
   const CDN_JSDELIVR = "https://cdn.jsdelivr.net/gh/Code-Machine-minsukim/HSRGUI-Mobile@main/assets";
   const CDN_RAW = "https://raw.githubusercontent.com/Code-Machine-minsukim/HSRGUI-Mobile/main/assets";
-  const ASSET_VERSION = "083";
+  const ASSET_VERSION = "090";
 
   function assetUrl(path, useRaw = false) {
     const base = useRaw ? CDN_RAW : CDN_JSDELIVR;
@@ -157,56 +261,23 @@
   };
 
   const RANDOM_STICKERS = [
-    "stickers/sticker_1.png",
-    "stickers/sticker_2.png",
-    "stickers/sticker_3.png",
-    "stickers/sticker_4.png",
-    "stickers/sticker_5.png",
-    "stickers/sticker_6.png",
-    "stickers/sticker_7.png",
-    "stickers/sticker_8.png",
-    "stickers/sticker_9.png",
-    "stickers/sticker_10.png",
-    "stickers/sticker_11.png",
-    "stickers/sticker_12.png",
-    "stickers/sticker_13.png",
-    "stickers/sticker_14.png",
-    "stickers/sticker_15.png",
-    "stickers/sticker_16.png",
-    "stickers/sticker_24.png",
-    "stickers/sticker_30.png",
-    "stickers/sticker_33.png",
-    "stickers/sticker_37.png",
-    "stickers/sticker_42.png",
-    "stickers/sticker_50.png",
-    "stickers/sticker_57.png",
-    "stickers/sticker_64.png",
-    "stickers/sticker_72.png",
-    "stickers/sticker_81.png",
-    "stickers/sticker_89.png",
-    "stickers/sticker_99.png",
-    "stickers/sticker_114.png",
-    "stickers/sticker_120.png",
-    "stickers/sticker_131.png",
-    "stickers/sticker_148.png",
-    "stickers/sticker_167.png",
-    "stickers/sticker_190.png",
-    "stickers/sticker_193.png",
-    "stickers/sticker_194.png",
-    "stickers/sticker_195.png",
-    "stickers/sticker_196.png",
-    "stickers/sticker_217.png",
-    "stickers/sticker_239.png",
-    "stickers/sticker_274.png",
-    "stickers/sticker_301.png",
-    "stickers/sticker_330.png",
-    "stickers/sticker_336.png",
-    "stickers/sticker_337.png",
-    "stickers/sticker_338.png",
-    "stickers/sticker_339.png",
-    "stickers/sticker_340.png",
-    "stickers/sticker_370.png",
-    "stickers/sticker_425.png"
+    "stickers/sticker_1.png", "stickers/sticker_2.png", "stickers/sticker_3.png",
+    "stickers/sticker_4.png", "stickers/sticker_5.png", "stickers/sticker_6.png",
+    "stickers/sticker_7.png", "stickers/sticker_8.png", "stickers/sticker_9.png",
+    "stickers/sticker_10.png", "stickers/sticker_11.png", "stickers/sticker_12.png",
+    "stickers/sticker_13.png", "stickers/sticker_14.png", "stickers/sticker_15.png",
+    "stickers/sticker_16.png", "stickers/sticker_24.png", "stickers/sticker_30.png",
+    "stickers/sticker_33.png", "stickers/sticker_37.png", "stickers/sticker_42.png",
+    "stickers/sticker_50.png", "stickers/sticker_57.png", "stickers/sticker_64.png",
+    "stickers/sticker_72.png", "stickers/sticker_81.png", "stickers/sticker_89.png",
+    "stickers/sticker_99.png", "stickers/sticker_114.png", "stickers/sticker_120.png",
+    "stickers/sticker_131.png", "stickers/sticker_148.png", "stickers/sticker_167.png",
+    "stickers/sticker_190.png", "stickers/sticker_193.png", "stickers/sticker_194.png",
+    "stickers/sticker_195.png", "stickers/sticker_196.png", "stickers/sticker_217.png",
+    "stickers/sticker_239.png", "stickers/sticker_274.png", "stickers/sticker_301.png",
+    "stickers/sticker_330.png", "stickers/sticker_336.png", "stickers/sticker_337.png",
+    "stickers/sticker_338.png", "stickers/sticker_339.png", "stickers/sticker_340.png",
+    "stickers/sticker_370.png", "stickers/sticker_425.png"
   ];
 
   function pickFrom(arr, seed) {
@@ -263,8 +334,8 @@
 
       #hsr-header-right {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: row;
+        align-items: flex-start;
         gap: 8px;
         flex-shrink: 0;
       }
@@ -295,14 +366,61 @@
         white-space: nowrap;
       }
 
-      #hsr-theme-switcher {
+      #hsr-settings-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 7px 11px;
+        font-size: 14px;
+        font-weight: 800;
+        background: ${theme.chipBg};
+        color: ${theme.chipText};
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      }
+
+      #hsr-settings-panel {
+        position: fixed;
+        top: 64px;
+        right: 12px;
+        width: min(320px, calc(100vw - 24px));
+        background: ${theme.settingsBg};
+        color: ${theme.settingsText};
+        border: 1px solid ${theme.settingsBorder};
+        border-radius: 16px;
+        box-shadow: 0 16px 36px rgba(0,0,0,0.18);
+        padding: 14px;
+        z-index: 99999;
+        display: none;
+        backdrop-filter: blur(12px);
+      }
+
+      #hsr-settings-panel.open {
+        display: block;
+      }
+
+      .hsr-settings-title {
+        font-size: 15px;
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+
+      .hsr-settings-group {
+        margin-bottom: 12px;
+      }
+
+      .hsr-settings-label {
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        opacity: 0.8;
+      }
+
+      .hsr-settings-options {
         display: flex;
         gap: 6px;
         flex-wrap: wrap;
-        justify-content: flex-end;
       }
 
-      .hsr-chip {
+      .hsr-settings-option {
         border: none;
         border-radius: 999px;
         padding: 6px 10px;
@@ -310,10 +428,10 @@
         font-weight: 800;
         background: ${theme.chipBg};
         color: ${theme.chipText};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       }
 
-      .hsr-chip.is-active {
+      .hsr-settings-option.is-active {
         outline: 2px solid rgba(0,0,0,0.18);
       }
 
@@ -443,7 +561,8 @@
         #hsr-badge { padding: 5px 9px; }
         #hsr-badge img { width: 24px; height: 24px; }
         #hsr-badge-text { font-size: 11px; }
-        .hsr-chip { padding: 5px 8px; font-size: 10px; }
+        #hsr-settings-btn { padding: 6px 10px; font-size: 13px; }
+        #hsr-settings-panel { top: 58px; right: 8px; width: min(300px, calc(100vw - 16px)); }
         .hsr-avatar-label img { width: 38px; height: 38px; }
         .hsr-sticker { width: 96px; }
       }
@@ -501,27 +620,17 @@
       badge.appendChild(badgeImg);
       badge.appendChild(badgeText);
 
-      const switcher = document.createElement("div");
-      switcher.id = "hsr-theme-switcher";
-
-      ["express", "midnight", "silver"].forEach((name) => {
-        const btn = document.createElement("button");
-        btn.className = "hsr-chip";
-        btn.type = "button";
-        btn.dataset.theme = name;
-        btn.textContent = name.toUpperCase();
-        btn.addEventListener("click", () => {
-          CONFIG.theme = name;
-          saveConfig();
-          applyCss();
-          refreshHeader();
-          processMessages(true);
-        });
-        switcher.appendChild(btn);
+      const settingsBtn = document.createElement("button");
+      settingsBtn.id = "hsr-settings-btn";
+      settingsBtn.type = "button";
+      settingsBtn.textContent = "⚙";
+      settingsBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleSettingsPanel();
       });
 
       right.appendChild(badge);
-      right.appendChild(switcher);
+      right.appendChild(settingsBtn);
 
       header.appendChild(left);
       header.appendChild(right);
@@ -529,7 +638,145 @@
       document.body.prepend(header);
     }
 
+    createSettingsPanel();
     refreshHeader();
+  }
+
+  function createSettingsPanel() {
+    let panel = document.getElementById("hsr-settings-panel");
+    if (panel) return;
+
+    panel = document.createElement("div");
+    panel.id = "hsr-settings-panel";
+
+    panel.innerHTML = `
+      <div class="hsr-settings-title">HSR Settings</div>
+
+      <div class="hsr-settings-group">
+        <div class="hsr-settings-label">Character Theme</div>
+        <div class="hsr-settings-options" id="hsr-character-theme-options"></div>
+      </div>
+
+      <div class="hsr-settings-group">
+        <div class="hsr-settings-label">Theme</div>
+        <div class="hsr-settings-options" id="hsr-theme-options"></div>
+      </div>
+
+      <div class="hsr-settings-group">
+        <div class="hsr-settings-label">Sticker Mode</div>
+        <div class="hsr-settings-options" id="hsr-sticker-options"></div>
+      </div>
+
+      <div class="hsr-settings-group">
+        <div class="hsr-settings-label">Assistant Avatar</div>
+        <div class="hsr-settings-options" id="hsr-avatar-options"></div>
+      </div>
+    `;
+
+    document.body.appendChild(panel);
+
+    buildOptionGroup("hsr-character-theme-options", [
+      ["march7", "March7"],
+      ["acheron", "Acheron"],
+      ["asta", "Asta"],
+      ["castorice", "Castorice"],
+      ["custom", "Custom"]
+    ], (value) => {
+      applyCharacterPreset(value);
+      applyCss();
+      refreshHeader();
+      syncSettingsPanel();
+      processMessages(true);
+    });
+
+    buildOptionGroup("hsr-theme-options", [
+      ["express", "Express"],
+      ["midnight", "Midnight"],
+      ["silver", "Silver"],
+      ["acheron", "Acheron"],
+      ["asta", "Asta"],
+      ["castorice", "Castorice"]
+    ], (value) => {
+      CONFIG.theme = value;
+      CONFIG.characterThemeMode = "custom";
+      saveConfig();
+      applyCss();
+      refreshHeader();
+      syncSettingsPanel();
+      processMessages(true);
+    });
+
+    buildOptionGroup("hsr-sticker-options", [
+      ["emotion", "Auto"],
+      ["random", "Random"],
+      ["on", "On"],
+      ["off", "Off"]
+    ], (value) => {
+      CONFIG.stickerMode = value;
+      saveConfig();
+      syncSettingsPanel();
+      processMessages(true);
+    });
+
+    buildOptionGroup("hsr-avatar-options", [
+      ["march7", "March7"],
+      ["acheron", "Acheron"],
+      ["asta", "Asta"],
+      ["castorice", "Castorice"]
+    ], (value) => {
+      CONFIG.assistantAvatarKey = value;
+      CONFIG.characterThemeMode = "custom";
+      saveConfig();
+      refreshHeader();
+      syncSettingsPanel();
+      processMessages(true);
+    });
+
+    document.addEventListener("click", (e) => {
+      const btn = document.getElementById("hsr-settings-btn");
+      const panelEl = document.getElementById("hsr-settings-panel");
+      if (!panelEl || !btn) return;
+      if (panelEl.contains(e.target) || btn.contains(e.target)) return;
+      panelEl.classList.remove("open");
+    });
+
+    syncSettingsPanel();
+  }
+
+  function buildOptionGroup(id, items, onClick) {
+    const wrap = document.getElementById(id);
+    if (!wrap) return;
+
+    items.forEach(([value, label]) => {
+      const btn = document.createElement("button");
+      btn.className = "hsr-settings-option";
+      btn.type = "button";
+      btn.dataset.value = value;
+      btn.textContent = label;
+      btn.addEventListener("click", () => onClick(value));
+      wrap.appendChild(btn);
+    });
+  }
+
+  function syncSettingsPanel() {
+    markOptionActive("hsr-character-theme-options", CONFIG.characterThemeMode);
+    markOptionActive("hsr-theme-options", CONFIG.theme);
+    markOptionActive("hsr-sticker-options", CONFIG.stickerMode);
+    markOptionActive("hsr-avatar-options", CONFIG.assistantAvatarKey);
+  }
+
+  function markOptionActive(groupId, activeValue) {
+    const wrap = document.getElementById(groupId);
+    if (!wrap) return;
+    wrap.querySelectorAll(".hsr-settings-option").forEach((btn) => {
+      btn.classList.toggle("is-active", btn.dataset.value === activeValue);
+    });
+  }
+
+  function toggleSettingsPanel() {
+    const panel = document.getElementById("hsr-settings-panel");
+    if (!panel) return;
+    panel.classList.toggle("open");
   }
 
   function refreshHeader() {
@@ -538,7 +785,6 @@
     const badge = document.getElementById("hsr-badge");
     const badgeImg = document.getElementById("hsr-badge-img");
     const badgeText = document.getElementById("hsr-badge-text");
-    const chips = document.querySelectorAll(".hsr-chip");
 
     if (title) title.textContent = CONFIG.headerTitle;
     if (subtitle) subtitle.textContent = CONFIG.headerSubtitle;
@@ -549,10 +795,6 @@
       badgeImg.src = avatarUrl(CONFIG.assistantAvatarKey, "march7", false);
     }
     if (badgeText) badgeText.textContent = CONFIG.assistantName;
-
-    chips.forEach((chip) => {
-      chip.classList.toggle("is-active", chip.dataset.theme === CONFIG.theme);
-    });
   }
 
   function getRoleNodes() {
@@ -601,7 +843,7 @@
 
   function detectMood(answerText, userText, index) {
     if (CONFIG.stickerMode === "off") return "off";
-    if (CONFIG.stickerMode === "random") return "random";
+    if (CONFIG.stickerMode === "random" || CONFIG.stickerMode === "on") return "random";
 
     const answer = normalizeText(answerText);
     const user = normalizeText(userText);
@@ -654,10 +896,7 @@
     const topMood = entries[0][0];
     const topScore = entries[0][1];
 
-    if (topScore <= 0) {
-      return CONFIG.randomSticker ? ["happy", "thinking", "surprise", "sad"][index % 4] : "thinking";
-    }
-
+    if (topScore <= 0) return ["happy", "thinking", "surprise", "sad"][index % 4];
     return topMood;
   }
 
@@ -798,6 +1037,8 @@
       const target = m.target;
       if (target && target.id === "hsr-header") return;
       if (target && target.closest && target.closest("#hsr-header")) return;
+      if (target && target.id === "hsr-settings-panel") return;
+      if (target && target.closest && target.closest("#hsr-settings-panel")) return;
     }
     scheduleRefresh();
   });
