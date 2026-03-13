@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.9.0
+
+Added
+
+- quick settings panel
+- character theme mode
+- theme selection inside settings
+- sticker mode selection inside settings
+- assistant avatar selection inside settings
+
+Changed
+
+- improved UI control flow
+- added persistent settings via localStorage
+- unified settings access through header button
+
+---
+
 ## 0.8.2
 
 Changed
