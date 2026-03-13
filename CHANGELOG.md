@@ -1,29 +1,89 @@
 # Changelog
 
-## 0.8.1
+## 0.9.2
 
-Emotion sticker system improved
+Improved
 
-- keyword weight detection
-- command phrase detection
-- assistant + user message analysis
-- improved sticker relevance
+- character theme colors now better match Honkai Star Rail aesthetics
+- polished settings panel visuals
+- enhanced compact mode with clearer spacing reduction
 
 Added
 
-- theme switching system
+- reset to default button
+
+---
+
+## 0.9.0
+
+Added
+
+- quick settings panel
+- character theme mode
+- theme selection inside settings
+- sticker mode selection inside settings
+- assistant avatar selection inside settings
+
+Changed
+
+- improved UI control flow
+- added persistent settings via localStorage
+- unified settings access through header button
+
+---
+
+## 0.8.2
+
+Changed
+
+- Moved asset loading from the original repository to this project repository
+- Replaced external asset dependency with local project CDN path
+- Refactored avatar resource structure for easier character expansion
+- Improved sticker resource structure for long term maintenance
+
+Added
+
+- Project owned asset base path
+- Configurable avatar key system
+- Expanded random sticker pool
+- Sticker mode option structure (`emotion`, `random`, `off`)
+
+Fixed
+
+- Removed dependency on original HSRGUI asset paths
+- Improved portability for public release
+- Prepared resource structure for future versions (0.9 / 1.0)
+
+---
+
+## 0.8.1
+
+Improved emotion detection for sticker system
+
+Changes
+
+- keyword weight based emotion detection
+- command phrase detection (ex: "웃어봐")
+- user message + assistant response analysis
+- better sticker relevance
+
+Added
+
 - animated sticker appearance
+- theme switching system
 - improved UI stability
 
 ---
 
 ## 0.5.2
 
-First public mobile adaptation.
+First public mobile adaptation of HSRGUI
 
 Features
 
-- mobile UI layout
+- mobile optimized UI layout
 - avatar display
 - chat bubble styling
 - basic sticker support
+
+
